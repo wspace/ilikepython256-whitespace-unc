@@ -13,6 +13,8 @@ combos = {"MOD":[" ", "\n ", "\t ", "\n\t", "\n\n", "\t\n", " "],
         "FLOW":["  ", " \t", " \n", "\t ", "\t\t", "\t\n", "\n\n", "\n"],
         "IO":["  ", " \t", "\t ", "\t\t", "\t\n"]
 }
+need_arg = ["MOD.PUSH", "MOD.COPY", "MOD.SLDE", "FLOW.LABL",
+             "FLOW.SUB", "FLOW.JUMP", "FLOW.JMPZ", "FLOW.JMPN"]
 def error(message, line):
     print("Error at line " + str(line+1) + " (" + ".".join(i[:-1]) + ("" if i[-1] == None else " " + i[-1]) + "):")
     print("    " + message)
