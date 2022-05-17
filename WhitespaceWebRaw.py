@@ -63,16 +63,15 @@ if args != "":
         if i[2] != "":
             if ".".join(i[:-1]) not in need_arg:
                 error("\"" + ".".join(i[:-1]) + "\" needs no argument, but was given \"" + i[2] + "\"", line)
-            try:
-                i[2] = int(i[2])
-            except ValueError as e:
-                if e.message.startswith("invalid literal for int() with base 10: '"):
-                    if i[2] == '"\\n"':
-                        i[2] = '"\n"'
-                    if len(i[2]) == 3 and i[2][0] + i[2][2] == '""':
-                        i[2] = ord(i[2][1])
-                    else:
-                        error("Argument \"" + i[2] + "\" is not a number nor a character", line)
+            if i[2] == '"\\n"':
+                i[2] = '"\n"'
+            elif len(i[2]) == 3 and i[2][0] + i[2][2] == '""':
+                i[2] = ord(i[2][1])
+            else:
+                try:
+                    i[2] = int(i[2])
+                except ValueError as e:
+                    error("Argument \"" + i[2] + "\" is not a number nor a character", line)
             code += ("\t" if i[2] < 0 else " ")
             code += bin(abs(i[2]))[2:].replace("0", " ").replace("1", "\t")
             code += "\n"
